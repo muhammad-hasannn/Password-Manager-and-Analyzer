@@ -28,8 +28,6 @@ public class Form {
     that's why diff methods
      */
 
-
-
     // 1. login form
     public User login(){
         System.out.println("\n╔═══════════════════════════════════╗");
