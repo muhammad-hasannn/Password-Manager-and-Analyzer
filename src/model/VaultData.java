@@ -5,10 +5,10 @@ public class VaultData {
     private String username;
     private String passwordEncrypted;
 
-    public VaultData(String passwordEncrypted, String platform, String username) {
-        this.passwordEncrypted = passwordEncrypted;
-        this.platform = platform;
+    public VaultData(String username, String platform, String passwordEncrypted) {
         this.username = username;
+        this.platform = platform;
+        this.passwordEncrypted = passwordEncrypted;
     }
 
     public String getPasswordEncrypted() {

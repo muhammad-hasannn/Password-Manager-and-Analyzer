@@ -9,13 +9,9 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-    public String getUsername() {
-        return username;
-    }
+    public String getPasswordHash() {return passwordHash;}
+    public String getUsername() {return username;}
 
-    // no need for setters, because username and password are not resettable
+    // no need for setters, as update feature is not available yet
 
 }
