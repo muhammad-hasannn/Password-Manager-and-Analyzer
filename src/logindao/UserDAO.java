@@ -1,4 +1,4 @@
-package database;
+package logindao;
 
 import model.User;
 import java.sql.*;

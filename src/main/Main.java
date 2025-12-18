@@ -1,6 +1,6 @@
 package main;
 
-import database.DBConnection;
+import logindao.DBConnection;
 
 public class Main {
     public static void main(String[] args) {
