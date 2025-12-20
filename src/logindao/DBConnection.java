@@ -4,7 +4,7 @@ import java.sql.*;
 public class DBConnection {
 
     // path of database
-    private static final String path = "D:/Hasan/OOP/Password-Manager-and-Analyzer/database/logindata/LoginCredentials.accdb";
+    private static final String path = "D:/Hasan/OOP/Password-Manager-and-Analyzer/database/login/LoginCredentials.accdb";
     private static final String url = "jdbc:ucanaccess://" + path;
 
     // method to get connection
