@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class VaultData {
     private String platform;
     private String username;
@@ -22,4 +24,14 @@ public class VaultData {
     }
 
     // no need for setters, as update feature is not available yet
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        VaultData vaultData = (VaultData) o;
+        return Objects.equals(platform, vaultData.platform) && Objects.equals(username, vaultData.username) && Objects.equals(passwordEncrypted, vaultData.passwordEncrypted);
+    }
+
+
 }
