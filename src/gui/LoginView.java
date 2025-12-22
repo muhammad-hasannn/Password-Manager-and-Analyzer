@@ -27,7 +27,7 @@ public class LoginView {
         root.setStyle("-fx-background-color: #f5f5f5;");
 
         // Title
-        Label titleLabel = new Label("🔐 PASSWORD MANAGER");
+        Label titleLabel = new Label("PASSWORD MANAGER");
         titleLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #333;");
 
         // Username
@@ -86,7 +86,7 @@ public class LoginView {
             String password = passwordField.getText();
 
             if (username.isEmpty() || password.isEmpty()) {
-                statusLabel.setText("❌ Please enter username and password!");
+                statusLabel.setText("Please enter username and password!");
                 statusLabel.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
                 return;
             }
@@ -95,7 +95,7 @@ public class LoginView {
             User user = userDAO.getUser(username);
 
             if (user == null) {
-                statusLabel.setText("❌ User not found!");
+                statusLabel.setText("User not found!");
                 statusLabel.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
                 return;
             }
@@ -104,7 +104,7 @@ public class LoginView {
             String hashedPassword = CryptoHandler.encrypt(password);
 
             if (hashedPassword.equals(user.getPasswordHash())) {
-                statusLabel.setText("✅ Login successful!");
+                statusLabel.setText("Login successful!");
                 statusLabel.setStyle("-fx-text-fill: green; -fx-font-size: 12px;");
 
                 // Open dashboard
@@ -112,7 +112,7 @@ public class LoginView {
                 dashboard.show(stage);
 
             } else {
-                statusLabel.setText("❌ Incorrect password!");
+                statusLabel.setText("Incorrect password!");
                 statusLabel.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
             }
         });

@@ -57,7 +57,7 @@ public class DisplayUtils {
         System.out.println("  ║           Thank You For Using                ║");
         System.out.println("  ║      PASSWORD MANAGER & ANALYZER             ║");
         System.out.println("  ║                                              ║");
-        System.out.println("  ║              Stay Secure! 🔐                 ║");
+        System.out.println("  ║              Stay Secure!                    ║");
         System.out.println("  ║                                              ║");
         System.out.println("  ╚══════════════════════════════════════════════╝");
         System.out.println("\n");

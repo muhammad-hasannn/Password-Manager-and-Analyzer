@@ -83,7 +83,7 @@ public class VaultManager {
 
         int count = 1;
         for (VaultData v : data) {
-            System.out.println("\n🔐 Entry #" + count);
+            System.out.println("\nEntry #" + count);
             System.out.println("   Platform: " + v.getPlatform());
             System.out.println("   Username: " + v.getUsername());
 

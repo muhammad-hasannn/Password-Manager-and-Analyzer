@@ -48,7 +48,7 @@ public class Main {
 
                 List<String> weakness = sa.analyzePassword(p);
 
-                if(weakness == null){
+                if(weakness.isEmpty()){
                     System.out.println("Your password is secure.");
                 }
                 else{
@@ -98,7 +98,7 @@ public class Main {
 
                                     List<String> weakness = sa.analyzePassword(p);
 
-                                    if(weakness == null){
+                                    if(weakness.isEmpty()){
                                         System.out.println("Your password is secure.");
                                     }
                                     else{
@@ -118,7 +118,11 @@ public class Main {
                                 }
 
                                 else if (dashChoice == 3) {
-                                    // Logout
+                                    // logout
+                                    ArrayList<VaultData> data = fileOps.getUserData(currentUser);
+                                    vaultManager = new VaultManager(data);
+
+
                                     if(vaultManager.getAllPasswords() != null){
                                         if (displayUtils.getConfirmation("Save and logout?")) {
                                             // Save vault data

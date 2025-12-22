@@ -68,11 +68,11 @@ public class Form {
         System.out.println("╚═══════════════════════════════════╝");
         System.out.println();
 
-        System.out.println("Enter platform name: ");
+        System.out.print("Enter platform name: ");
         String platform = sc.nextLine().trim();
-        System.out.println("Enter username: ");
+        System.out.print("Enter username: ");
         String username = sc.nextLine().trim();
-        System.out.println("Enter password: ");
+        System.out.print("Enter password: ");
         String password = sc.nextLine().trim();
 
         return new VaultData(platform, username, password);

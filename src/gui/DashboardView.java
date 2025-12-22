@@ -28,14 +28,14 @@ public class DashboardView {
         welcomeLabel.setStyle("-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #333;");
 
         // Password Vault Button
-        Button vaultButton = createButton("🔐 My Password Vault", "#4CAF50");
+        Button vaultButton = createButton(" My Password Vault", "#4CAF50");
         vaultButton.setOnAction(e -> {
             VaultView vaultView = new VaultView(username);
             vaultView.show(stage);
         });
 
         // Strength Analyzer Button
-        Button analyzerButton = createButton("🔍 Password Strength Analyzer", "#2196F3");
+        Button analyzerButton = createButton("Password Strength Analyzer", "#2196F3");
         analyzerButton.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Strength Analyzer");
@@ -44,7 +44,7 @@ public class DashboardView {
 
             dialog.showAndWait().ifPresent(password -> {
                 if (!password.isEmpty()) {
-                    // ✅ You can integrate your PasswordAnalyzer here!
+                    // You can integrate your PasswordAnalyzer here!
                     showAlert("Analysis", "Password Strength Analyzer\n\nFeature coming soon!");
                 }
             });
