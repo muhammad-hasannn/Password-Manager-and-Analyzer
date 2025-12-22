@@ -6,7 +6,7 @@ import java.sql.*;
 public class UserDAO {
 
     // 1. method to Add User
-    public void addUser(User u){
+    public boolean addUser(User u){
 
         String sql = "INSERT INTO Users(Username, PasswordHash) Values(?, ?)";
 
@@ -19,9 +19,9 @@ public class UserDAO {
             pstmt.setString(2, u.getPasswordHash());
 
             pstmt.executeUpdate();
-            System.out.println("User added successfully!");
+            return true;
         }catch(SQLException e){
-            System.out.println("Error in adding user: " + e.getMessage());
+            return false;
         }
     }
 

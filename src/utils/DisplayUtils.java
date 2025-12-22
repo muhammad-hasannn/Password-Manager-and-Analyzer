@@ -10,7 +10,7 @@ public class DisplayUtils {
     }
 
     //---Utility: Press Enter to Continue---
-    private void pressEnterToContinue() {
+    public void pressEnterToContinue() {
         System.out.print("\nPress Enter to continue...");
         sc.nextLine();
     }

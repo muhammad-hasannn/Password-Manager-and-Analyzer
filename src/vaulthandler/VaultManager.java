@@ -57,9 +57,18 @@ public class VaultManager {
         return true;
     }
 
-    // 4. view all passwords
-    public void viewAllPasswords() {
+    // 4. get all passwords (because it is required for gui)
+    public ArrayList<VaultData> getAllPasswords() {
 
+        // Check if empty
+        if (data.isEmpty()) {
+            return null;
+        }
+
+        return data;
+    }
+
+    public void viewAllPasswords(){
         // Check if empty
         if (data.isEmpty()) {
             System.out.println("\nNo passwords saved yet!");
