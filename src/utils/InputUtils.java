@@ -3,12 +3,6 @@ package utils;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// custom exception
-class InvalidChoiceException extends Exception {
-    public InvalidChoiceException(String message){
-        super(message);
-    }
-}
 
 public class InputUtils {
 
@@ -42,7 +36,6 @@ public class InputUtils {
 
                 return var;
             } catch (InvalidChoiceException e) {
-
                 System.out.println(e.getMessage());
             }
         }

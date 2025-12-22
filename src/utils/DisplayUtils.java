@@ -9,24 +9,6 @@ public class DisplayUtils {
         this.sc = sc;
     }
 
-    //---Utility: Show Success Message---
-    public void showSuccessMessage(String message) {
-        System.out.println("\n" + message);
-        pressEnterToContinue();
-    }
-
-    //---Utility: Show Error Message---
-    public void showErrorMessage(String message) {
-        System.out.println("\n" + message);
-        pressEnterToContinue();
-    }
-
-    //---Utility: Show Info Message---
-    public void showInfoMessage(String message) {
-        System.out.println("\n" + message);
-        pressEnterToContinue();
-    }
-
     //---Utility: Press Enter to Continue---
     private void pressEnterToContinue() {
         System.out.print("\nPress Enter to continue...");
@@ -49,9 +31,9 @@ public class DisplayUtils {
         }
     }
     /*
-    .trim()
-    Original string: '   Hello World   '
-    Trimmed string: 'Hello World'
+        .trim()
+        Original string: "   Hello World   "
+        Trimmed string: "Hello World"
      */
 
     //---Display: Application Title---

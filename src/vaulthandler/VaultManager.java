@@ -2,7 +2,7 @@ package vaulthandler;
 
 import model.VaultData;
 import java.util.ArrayList;
-import static security.CryptoHandler.decrypt;
+import security.CryptoHandler;
 
 public class VaultManager {
     private ArrayList<VaultData> data;
@@ -78,7 +78,7 @@ public class VaultManager {
             System.out.println("   Platform: " + v.getPlatform());
             System.out.println("   Username: " + v.getUsername());
 
-            String plainPassword = decrypt(v.getPasswordEncrypted());
+            String plainPassword = CryptoHandler.decrypt(v.getPasswordEncrypted());
             System.out.println("   Password: " + plainPassword);
             System.out.println("─".repeat(50));
             count++;
