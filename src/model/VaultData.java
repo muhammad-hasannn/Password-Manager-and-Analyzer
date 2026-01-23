@@ -23,15 +23,19 @@ public class VaultData {
         return username;
     }
 
-    // no need for setters, as update feature is not available yet
 
-
+    /**
+     * equals method is overridden, because at the time updating we will verify the data members
+     *
+     * @param o   the reference object with which to compare.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         VaultData vaultData = (VaultData) o;
+
         return Objects.equals(platform, vaultData.platform) && Objects.equals(username, vaultData.username) && Objects.equals(passwordEncrypted, vaultData.passwordEncrypted);
     }
 
-
+    // no need for setters, as update feature is not available yet
 }

@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileOperations {
-    private static final String FILE_PATH = "database/vault/passwords.txt";
+    private static final String FILE_PATH = "database/passwords.txt";
 
     /* 1. create new user:
        whenever a new user will sign up, we will append "[username]" in the file
@@ -59,14 +59,14 @@ public class FileOperations {
         return data;
     }
 
-    /* 3 update vault
+    /* 3. update vault
        when user will sign out, and if any change will be happened in the Vault[]
        we will update the file with updated array
      */
     public void updateVault(String username, ArrayList<VaultData> updatedData){
         String userMarker = "[" + username + "]";
 
-        // objects pointing on file, we created them because after we will rename temp_vault and also delete original file
+        // objects pointing on files(the original one and temp one), we created them because after we will rename temp_vault and also delete original file
         File originalFile = new File(FILE_PATH);
         File tempFile = new File("tempVault.txt");
 
@@ -95,18 +95,20 @@ public class FileOperations {
                     while(((line = br.readLine()) != null) && !line.startsWith("[")){
                         // just skipping those lines
                     }
-
-                    /*
-                       as the above loop has moved the br pointer have moved to next user's marker,
-                       so we should write that in temp file here, because there is continue statement at the end
-
-                       After the skipping loop, line could be:
-                            null → reached the end of file, nothing more to write.
-                            [NextUser] → the first line of the next user’s block.
-
-                        we can also remove continue and get done this by main loop (bw.write(line); bw.newLine();),
-                        what if the pointer reaches the end.....
+                    /**
+                     * <pre>
+                     * as the above loop has moved the br pointer have moved to next user's marker,
+                     * so we should write that in temp file here, because there is continue statement at the end
+                     *
+                     * After the skipping loop, line could be:
+                     *       null → reached the end of file, nothing more to write.
+                     *       [NextUser] → the first line of the next user’s block.
+                     *
+                     * we can also remove continue and get done this by main loop (bw.write(line); bw.newLine();),
+                     * but... what if the pointer reaches the end...
+                     * </pre>
                      */
+
                     if(line != null){
                         bw.write(line);
                         bw.newLine();

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+// Total 11 checks.
+
+
 public class StrengthAnalyzer {
     
     // Password requirements constants
@@ -11,7 +14,7 @@ public class StrengthAnalyzer {
     private static final int MAX_LENGTH = 128;
     private static final int RECOMMENDED_LENGTH = 12;
     
-    /*
+    /**
      * Analyzes plainPassword strength and returns a list of weaknesses.
      * If the list is empty, the plainPassword is strong and meets all requirements.
      * 
@@ -21,58 +24,58 @@ public class StrengthAnalyzer {
     public List<String> analyzePassword(String plainPassword) {
         List<String> weaknesses = new ArrayList<>();
         
-        // Check if plainPassword is null or empty
+        // 1. Check if plainPassword is null or empty
         if (plainPassword == null || plainPassword.isEmpty()) {
             weaknesses.add("Password cannot be empty");
             return weaknesses;
         }
         
-        // Check minimum length
+        // 2. Check minimum length
         if (plainPassword.length() < MIN_LENGTH) {
             weaknesses.add("Password must be at least " + MIN_LENGTH + " characters long");
         }
         
-        // Check maximum length
+        // 3. Check maximum length
         if (plainPassword.length() > MAX_LENGTH) {
             weaknesses.add("Password must not exceed " + MAX_LENGTH + " characters");
         }
         
-        // Check for uppercase letters
+        // 4. Check for uppercase letters
         if (!Pattern.compile("[A-Z]").matcher(plainPassword).find()) {
             weaknesses.add("Password must contain at least one uppercase letter (A-Z)");
         }
         
-        // Check for lowercase letters
+        // 5. Check for lowercase letters
         if (!Pattern.compile("[a-z]").matcher(plainPassword).find()) {
             weaknesses.add("Password must contain at least one lowercase letter (a-z)");
         }
         
-        // Check for digits
+        // 6. Check for digits
         if (!Pattern.compile("[0-9]").matcher(plainPassword).find()) {
             weaknesses.add("Password must contain at least one digit (0-9)");
         }
         
-        // Check for special characters
+        // 7. Check for special characters
         if (!Pattern.compile("[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]").matcher(plainPassword).find()) {
             weaknesses.add("Password must contain at least one special character (!@#$%^&*()_+-=[]{}|;:',.<>?/)");
         }
         
-        // Check for common patterns
+        // 8. Check for common patterns
         if (containsCommonPatterns(plainPassword)) {
             weaknesses.add("Password contains common patterns (e.g., '123', 'abc', 'qwerty')");
         }
         
-        // Check for repeated characters
+        // 9. Check for repeated characters
         if (hasExcessiveRepeatedCharacters(plainPassword)) {
             weaknesses.add("Password contains too many repeated characters");
         }
         
-        // Check for sequential characters
+        // 10. Check for sequential characters
         if (hasSequentialCharacters(plainPassword)) {
             weaknesses.add("Password contains sequential characters (e.g., 'abcd', '1234')");
         }
         
-        // Recommend longer plainPassword for better security
+        // 11. Recommend longer plainPassword for better security
         if (plainPassword.length() < RECOMMENDED_LENGTH && weaknesses.isEmpty()) {
             weaknesses.add("Password is acceptable but recommended length is " + RECOMMENDED_LENGTH + "+ characters for better security");
         }
@@ -80,8 +83,10 @@ public class StrengthAnalyzer {
         return weaknesses;
     }
     
+
+    // ---CUSTOM METHODS TO ANALYZE STRENGTH---
     /*
-     * Checks if password contains common weak patterns
+     * 1. Checks if password contains common weak patterns
      */
     private boolean containsCommonPatterns(String password) {
         String lowerPassword = password.toLowerCase();
@@ -99,7 +104,7 @@ public class StrengthAnalyzer {
     }
     
     /*
-     * Checks if password has more than 3 consecutive repeated characters
+     * 2. Checks if password has more than 3 consecutive repeated characters
      */
     private boolean hasExcessiveRepeatedCharacters(String password) {
         for (int i = 0; i < password.length() - 2; i++) {
@@ -112,7 +117,7 @@ public class StrengthAnalyzer {
     }
     
     /*
-     * Checks if password contains sequential characters (3+ in a row)
+     * 3. Checks if password contains sequential characters (3+ in a row)
      */
     private boolean hasSequentialCharacters(String password) {
         String lowerPassword = password.toLowerCase();

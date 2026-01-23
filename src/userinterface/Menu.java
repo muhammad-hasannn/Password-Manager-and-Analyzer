@@ -3,12 +3,12 @@ package userinterface;
 import java.util.Scanner;
 import utils.InputUtils;
 
+// Total 4 Menus
+
 public class Menu {
     Scanner sc;
     InputUtils inputUtils;
 
-
-    // Constructor
     public Menu(Scanner sc) {
         this.sc = sc;
         inputUtils = new InputUtils();

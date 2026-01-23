@@ -12,7 +12,7 @@ public class UserDAO {
 
         // making connection and preparing statement
         try(Connection con = DBConnection.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(sql);){
+            PreparedStatement pstmt = con.prepareStatement(sql)){
 
             // filling placeholders (?)
             pstmt.setString(1, u.getUsername());
@@ -20,7 +20,7 @@ public class UserDAO {
 
             pstmt.executeUpdate();
             return true;
-        }catch(SQLException e){
+        } catch(SQLException e){
             return false;
         }
     }

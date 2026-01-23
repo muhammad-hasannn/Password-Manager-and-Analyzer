@@ -1,5 +1,9 @@
 package utils;
 
+import model.VaultData;
+import security.CryptoHandler;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DisplayUtils {
@@ -9,13 +13,13 @@ public class DisplayUtils {
         this.sc = sc;
     }
 
-    //---Utility: Press Enter to Continue---
+    //---Press Enter to Continue---
     public void pressEnterToContinue() {
         System.out.print("\nPress Enter to continue...");
         sc.nextLine();
     }
 
-    //---Utility: Get Confirmation---
+    //---Get Confirmation---
     public boolean getConfirmation(String message) {
         while (true) {
             System.out.print(message + " (y/n): ");
@@ -30,10 +34,12 @@ public class DisplayUtils {
             System.out.println("Please enter 'y' or 'n'");
         }
     }
-    /*
-        .trim()
-        Original string: "   Hello World   "
-        Trimmed string: "Hello World"
+    /**
+     * <pre>
+     * .trim()
+     * Original string: "   Hello World   "
+     * Trimmed string: "Hello World"
+     * </pre>
      */
 
     //---Display: Application Title---
@@ -61,5 +67,33 @@ public class DisplayUtils {
         System.out.println("  ║                                              ║");
         System.out.println("  ╚══════════════════════════════════════════════╝");
         System.out.println("\n");
+    }
+
+    //---Display: View all passwords
+    public void viewAllPasswords(ArrayList<VaultData> data){
+
+        // Check if empty
+        if (data.isEmpty()) {
+            System.out.println("\nNo passwords saved yet!");
+            return;
+        }
+
+        System.out.println("\n╔════════════════════════════════════════════════╗");
+        System.out.println("║            YOUR SAVED PASSWORDS                ║");
+        System.out.println("╚════════════════════════════════════════════════╝");
+        System.out.println("\nTotal passwords: " + data.size());
+        System.out.println("─".repeat(50));
+
+        int count = 1;
+        for (VaultData v : data) {
+            System.out.println("\nEntry #" + count);
+            System.out.println("   Platform: " + v.getPlatform());
+            System.out.println("   Username: " + v.getUsername());
+
+            String plainPassword = CryptoHandler.decrypt(v.getPasswordEncrypted());
+            System.out.println("   Password: " + plainPassword);
+            System.out.println("─".repeat(50));
+            count++;
+        }
     }
 }

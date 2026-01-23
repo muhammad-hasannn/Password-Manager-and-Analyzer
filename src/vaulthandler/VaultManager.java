@@ -2,7 +2,6 @@ package vaulthandler;
 
 import model.VaultData;
 import java.util.ArrayList;
-import security.CryptoHandler;
 
 public class VaultManager {
     private ArrayList<VaultData> data;
@@ -11,7 +10,7 @@ public class VaultManager {
         this.data = data;
     }
 
-    // this method will check if the passed platform name and it's password is unique or not
+    // UTILITY: this method will check if the passed platform name and it's password is unique or not
     public boolean matchesPlatformAndUsername(String platform, String username){
         for(VaultData v : data){
             if(v.getPlatform().equals(platform)){
@@ -55,43 +54,6 @@ public class VaultManager {
         data.add(newData);
 
         return true;
-    }
-
-    // 4. get all passwords (because it is required for gui)
-    public ArrayList<VaultData> getAllPasswords() {
-
-        // Check if empty
-        if (data.isEmpty()) {
-            return null;
-        }
-
-        return data;
-    }
-
-    public void viewAllPasswords(){
-        // Check if empty
-        if (data.isEmpty()) {
-            System.out.println("\nNo passwords saved yet!");
-            return;
-        }
-
-        System.out.println("\n╔════════════════════════════════════════════════╗");
-        System.out.println("║            YOUR SAVED PASSWORDS                ║");
-        System.out.println("╚════════════════════════════════════════════════╝");
-        System.out.println("\nTotal passwords: " + data.size());
-        System.out.println("─".repeat(50));
-
-        int count = 1;
-        for (VaultData v : data) {
-            System.out.println("\nEntry #" + count);
-            System.out.println("   Platform: " + v.getPlatform());
-            System.out.println("   Username: " + v.getUsername());
-
-            String plainPassword = CryptoHandler.decrypt(v.getPasswordEncrypted());
-            System.out.println("   Password: " + plainPassword);
-            System.out.println("─".repeat(50));
-            count++;
-        }
     }
 
 }

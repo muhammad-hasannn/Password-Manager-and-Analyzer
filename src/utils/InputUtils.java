@@ -8,7 +8,7 @@ public class InputUtils {
 
     // 1. method to take integer input
     public int getIntInput(Scanner sc, String message){
-        int var = 0;
+        int var;
 
         while(true){
             try{
@@ -26,8 +26,10 @@ public class InputUtils {
 
     // 2. method to take valid integer + valid choice
     public int getValidChoiceInt(Scanner sc, String message, int min, int max){
-        int var = 0;
+        int var;
 
+        // this loop will keep running until the valid choice is taken from user.
+        // as soon user enters the valid choice, it will return it at the moment
         while(true){
             try{
                 var = getIntInput(sc, message);
@@ -39,7 +41,6 @@ public class InputUtils {
                 System.out.println(e.getMessage());
             }
         }
-
-
     }
+
 }
