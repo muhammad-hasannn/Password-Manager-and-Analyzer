@@ -12,13 +12,13 @@ public class UserDAO {
 
         // making connection and preparing statement
         try(Connection con = DBConnection.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(sql)){
+            PreparedStatement stmt = con.prepareStatement(sql)){
 
             // filling placeholders (?)
-            pstmt.setString(1, u.getUsername());
-            pstmt.setString(2, u.getPasswordHash());
+            stmt.setString(1, u.getUsername());
+            stmt.setString(2, u.getPasswordHash());
 
-            pstmt.executeUpdate();
+            stmt.executeUpdate();
             return true;
         } catch(SQLException e){
             return false;
@@ -30,10 +30,10 @@ public class UserDAO {
         String sql = "SELECT 1 FROM Users WHERE Username = ?";
 
         try(Connection con = DBConnection.getConnection();
-        PreparedStatement pstmt = con.prepareStatement(sql)){
-            pstmt.setString(1, username);
+        PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setString(1, username);
 
-            ResultSet rs = pstmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 
             return rs.next();
         } catch (SQLException e) {
@@ -49,10 +49,10 @@ public class UserDAO {
         String sql = "SELECT * FROM Users WHERE Username = ?";
 
         try(Connection con = DBConnection.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(sql)){
-            pstmt.setString(1, username);
+            PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setString(1, username);
 
-            ResultSet rs = pstmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 
             if(rs.next()){
                 // getString() is a method of the ResultSet class that extracts data from a specific column in the current row.

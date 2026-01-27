@@ -43,4 +43,11 @@ public class InputUtils {
         }
     }
 
+    // 3. Method to take Strength analyzer input
+    public String getStrengthAnalyzerInput(Scanner sc){
+        System.out.print("\nEnter your password: ");
+
+        return sc.nextLine();
+    }
+
 }

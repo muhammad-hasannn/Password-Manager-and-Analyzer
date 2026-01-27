@@ -27,7 +27,7 @@ public class VaultData {
     /**
      * equals method is overridden, because at the time updating we will verify the data members
      *
-     * @param o   the reference object with which to compare.
+     * @param o the reference object with which to compare.
      */
     @Override
     public boolean equals(Object o) {

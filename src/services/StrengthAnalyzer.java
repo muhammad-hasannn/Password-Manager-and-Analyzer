@@ -1,11 +1,13 @@
 package services;
 
+import utils.InputUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 // Total 11 checks.
-
 
 public class StrengthAnalyzer {
     
@@ -134,5 +136,25 @@ public class StrengthAnalyzer {
             }
         }
         return false;
+    }
+
+    /**
+     * the final working method
+     */
+    public void useStrengthAnalyzer(Scanner sc){
+
+        InputUtils iu = new InputUtils();
+        List<String> weakness = analyzePassword(iu.getStrengthAnalyzerInput(sc));
+
+        if(weakness.isEmpty()){
+            System.out.println("\nYour password is strong.");
+        }
+        else{
+            System.out.println("\nYour password has following weaknesses: \n");
+            for(String s : weakness){
+                System.out.println("\t" + s);
+            }
+            System.out.println();
+        }
     }
 }  

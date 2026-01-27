@@ -42,6 +42,11 @@ public class DisplayUtils {
      * </pre>
      */
 
+    //---Show invalid input message
+    public void invalidInputMessage(){
+        System.out.println("Invalid input!");
+    }
+
     //---Display: Application Title---
     public void showApplicationTitle() {
         System.out.println("\n");

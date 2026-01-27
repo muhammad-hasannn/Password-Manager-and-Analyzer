@@ -47,7 +47,7 @@ public class Menu {
         System.out.println("║  Welcome, " + username + "!");
         System.out.println("╚═══════════════════════════════════╝");
         System.out.println("1. Strength Analyzer");
-        System.out.println("2. Password Manager");
+        System.out.println("2. Go to Password Vault");
         System.out.println("3. Sign Out");
         System.out.println();
 

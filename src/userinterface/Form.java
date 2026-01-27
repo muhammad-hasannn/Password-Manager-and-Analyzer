@@ -1,8 +1,13 @@
 package userinterface;
 
+import logindao.UserDAO;
 import model.User;
 import model.VaultData;
+import security.CryptoHandler;
+import services.StrengthAnalyzer;
+import utils.DisplayUtils;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Form {
@@ -15,20 +20,13 @@ public class Form {
     /**
      * <pre>
      * NOTE:
-     * all the validations:
+     * the validations:
      *     1. at the time of login
      *         - username validation (it must match)
      *         - password validation (that it must match)
      *           also before matching password will be hashed
      *
-     *      2.  at the time of signup
-     *         - username uniqueness
-     *         - password strength & hashing
-     *
-     *    these all be done where ever they will be called
-     *
-     * at this moment both forms are doing same work, but in future we can add more attributes for signup,
-     * that's why diff methods
+     *     these all be done where ever they will be called
      * </pre>
     */
 
@@ -42,25 +40,64 @@ public class Form {
         System.out.print("Enter your username: ");
         String username = sc.nextLine().trim();
         System.out.print("Enter your password: ");
-        String password = sc.nextLine().trim();
+        String plainPassword = sc.nextLine().trim();
 
-        return new User(username, password);
+        String hashedPassword = CryptoHandler.encrypt(plainPassword);
+
+        return new User(username, hashedPassword);
     }
 
     // 2. Signup
     public User signup(){
+        StrengthAnalyzer sa = new StrengthAnalyzer();
+        UserDAO ud = new UserDAO();
+        DisplayUtils du = new DisplayUtils(sc);
+
         System.out.println("\n╔═══════════════════════════════════╗");
         System.out.println("║           CREATE ACCOUNT          ║");
         System.out.println("╚═══════════════════════════════════╝");
         System.out.println();
 
-        System.out.print("Enter your username: ");
-        String username = sc.nextLine().trim();
-        System.out.print("Enter your password: ");
-        String password = sc.nextLine().trim();
+        String username;
+        while(true){
+            System.out.print("Create username: ");
+            username = sc.nextLine().trim();
 
-        return new User(username, password);
+            if(ud.searchUser(username)){
+                System.out.println("\nUsername already exists!\n");
 
+                // now asking if user want to exit
+                if(du.getConfirmation("Do you want to exit?")){
+                    return null;
+                }
+            }
+            else{
+                break;
+            }
+        }
+
+        String password;
+        while(true){
+            System.out.print("Create password: ");
+            password = sc.nextLine().trim();
+
+            List<String> weakness = sa.analyzePassword(password);
+            if(weakness.isEmpty()){
+                System.out.println("\nYour password is strong.");
+                break;
+            }
+            else{
+                System.out.println("\nYour password has following weaknesses: \n");
+                for(String s : weakness){
+                    System.out.println("\t" + s);
+                }
+                System.out.println();
+            }
+
+        }
+
+        String hashedPassword = CryptoHandler.encrypt(password);
+        return new User(username, hashedPassword);
     }
 
     // 3. method to get vault data

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class User {
     private String username;
     private String passwordHash;
@@ -12,6 +14,11 @@ public class User {
     public String getPasswordHash() {return passwordHash;}
     public String getUsername() {return username;}
 
-    // no need for setters, as update feature is not available yet
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username) && Objects.equals(passwordHash, user.passwordHash);
+    }
 
 }
