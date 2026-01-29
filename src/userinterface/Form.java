@@ -114,6 +114,8 @@ public class Form {
         System.out.print("Enter password: ");
         String password = sc.nextLine().trim();
 
-        return new VaultData(platform, username, password);
+        String hashedPassword = CryptoHandler.encrypt(password);
+
+        return new VaultData(platform, username, hashedPassword);
     }
 }

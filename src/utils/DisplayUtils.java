@@ -13,11 +13,6 @@ public class DisplayUtils {
         this.sc = sc;
     }
 
-    //---Press Enter to Continue---
-    public void pressEnterToContinue() {
-        System.out.print("\nPress Enter to continue...");
-        sc.nextLine();
-    }
 
     //---Get Confirmation---
     public boolean getConfirmation(String message) {
@@ -42,10 +37,6 @@ public class DisplayUtils {
      * </pre>
      */
 
-    //---Show invalid input message
-    public void invalidInputMessage(){
-        System.out.println("Invalid input!");
-    }
 
     //---Display: Application Title---
     public void showApplicationTitle() {

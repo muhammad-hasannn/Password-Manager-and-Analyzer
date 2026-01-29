@@ -7,8 +7,9 @@ import java.util.ArrayList;
 public class FileOperations {
     private static final String FILE_PATH = "database/passwords.txt";
 
-    /* 1. create new user:
-       whenever a new user will sign up, we will append "[username]" in the file
+    /**
+     * 1. create new user:
+     * whenever a new user will sign up, we will append "[username]" in the file
      */
     public void createNewUser(String username){
 
@@ -59,9 +60,10 @@ public class FileOperations {
         return data;
     }
 
-    /* 3. update vault
-       when user will sign out, and if any change will be happened in the Vault[]
-       we will update the file with updated array
+    /**
+     * 3. update vault
+     * when user will sign out, and if any change will be happened in the Vault[]
+     * we will update the file with updated array
      */
     public void updateVault(String username, ArrayList<VaultData> updatedData){
         String userMarker = "[" + username + "]";

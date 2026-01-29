@@ -63,7 +63,7 @@ public class Menu {
         System.out.println("2. View All Passwords");
         System.out.println("3. Delete Password");
         System.out.println("4. Update Password");
-        System.out.println("5. Back to Main Menu");
+        System.out.println("5. Back to User Dashboard");
         System.out.println();
 
         return inputUtils.getValidChoiceInt(sc, "Enter your choice: ", 1, 5);

@@ -1,12 +1,17 @@
 package main;
 
+import logindao.DBConnection;
 import model.User;
+import model.VaultData;
 import services.StrengthAnalyzer;
 import userinterface.Menu;
 import userinterface.Form;
 import utils.DisplayUtils;
 import logindao.UserDAO;
+import vaulthandler.FileOperations;
+import vaulthandler.VaultManager;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleMain {
@@ -15,7 +20,82 @@ public class ConsoleMain {
      * 4. Handling vault manager menu
      */
     public static void runVaultManager(Scanner sc, User user){
-        System.out.println("Soon...");
+
+        Menu m = new Menu(sc);
+        DisplayUtils du = new DisplayUtils(sc);
+        FileOperations fo = new FileOperations();
+        Form f = new Form(sc);
+
+        // loading data in arraylist
+        ArrayList<VaultData> data = fo.getUserData(user.getUsername());
+        boolean isDataUpdated = false;
+
+        VaultManager vm = new VaultManager(data);
+
+        boolean isVaultRunning = true;
+        while(isVaultRunning){
+            int vaultManagerChoice = m.userVault();
+
+            switch (vaultManagerChoice){
+
+                // ADD NEW PASSWORD
+                case 1:
+                    isDataUpdated = true;
+                    VaultData newEntry = f.takeVaultData();
+
+                    if(vm.addNewPassword(newEntry))
+                        System.out.println("\nVault updated!\n");
+                    else
+                        System.out.println("\nPassword already exists!\n");
+                break;
+
+                // VIEW ALL PASSWORDS
+                case 2:
+                    du.viewAllPasswords(data);
+                break;
+
+                // DELETE PASSWORD
+                case 3:
+                    isDataUpdated = true;
+
+                    System.out.println("\nEnter credentials of password to delete: \n");
+                    VaultData dataToDelete = f.takeVaultData();
+
+                    if(vm.deletePassword(dataToDelete))
+                        System.out.println("Data deleted!");
+                    else
+                        System.out.println("Data not exists!");
+                break;
+
+                // UPDATE PASSWORD
+                case 4:
+                    isDataUpdated = true;
+
+                    System.out.println("Enter credentials of old data: \n");
+                    VaultData oldData = f.takeVaultData();
+
+                    System.out.println("Enter credentials for new data: \n");
+                    VaultData newData = f.takeVaultData();
+
+                    if(vm.updatePassword(oldData, newData))
+                        System.out.println("Updated Successfully!");
+                    else
+                        System.out.println("Data does not exists!");
+                break;
+
+                // BACK TO MAIN MENU
+                case 5:
+                    if(du.getConfirmation("Do you want to go to dashboard? ")){
+                        isVaultRunning = false;
+                    }
+                break;
+            }
+        }
+
+        // sending the updated data
+        if(isDataUpdated) fo.updateVault(user.getUsername(), data);
+        else System.out.println("Unable to save user vault data.");
+                
     }
 
     /**
@@ -28,7 +108,6 @@ public class ConsoleMain {
         StrengthAnalyzer sa = new StrengthAnalyzer();
 
         boolean isUserLogin = true;
-
         while(isUserLogin){
             int userDashboardChoice = m.userDashboard(user.getUsername());
 
@@ -64,6 +143,7 @@ public class ConsoleMain {
         Menu m = new Menu(sc);
         Form f = new Form(sc);
         UserDAO ud = new UserDAO();
+        FileOperations fo = new FileOperations();
 
         boolean isPasswordManagerRunning = true;
 
@@ -96,8 +176,14 @@ public class ConsoleMain {
                     User newUser = f.signup();
 
                     if(newUser != null){
-                        ud.addUser(newUser);
-                        System.out.println("\nAccount created!\n");
+                        if(ud.addUser(newUser)){
+                            System.out.println("\nAccount created!\n");
+                            // also creating user header in file (vault)
+                            fo.createNewUser(newUser.getUsername());
+                        }
+                        else System.out.println("Error in creating new user.");
+
+
                     }
                 break;
 
@@ -115,6 +201,9 @@ public class ConsoleMain {
      * 1. Handling Main Menu
      */
     public static void main(String[] args) {
+
+        // first of all checking connection
+        if(!DBConnection.testConnection()) return;
 
         Scanner sc = new Scanner(System.in);
         DisplayUtils du = new DisplayUtils(sc);
