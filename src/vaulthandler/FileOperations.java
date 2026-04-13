@@ -65,12 +65,12 @@ public class FileOperations {
      * when user will sign out, and if any change will be happened in the Vault[]
      * we will update the file with updated array
      */
-    public void updateVault(String username, ArrayList<VaultData> updatedData){
+    public boolean updateVault(String username, ArrayList<VaultData> updatedData){
         String userMarker = "[" + username + "]";
 
         // objects pointing on files(the original one and temp one), we created them because after we will rename temp_vault and also delete original file
         File originalFile = new File(FILE_PATH);
-        File tempFile = new File("tempVault.txt");
+        File tempFile = new File("tempVaultFile.txt");
 
         try(BufferedReader br = new BufferedReader(new FileReader(originalFile));
         BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
@@ -111,27 +111,34 @@ public class FileOperations {
                      * </pre>
                      */
 
-                    if(line != null){
+                    if(line != null){ // means it is a user marker, writing that...
                         bw.write(line);
                         bw.newLine();
                     }
                     continue;
-                }
+
+                } // 'if we hit the required user' block ends
+
                 bw.write(line);
                 bw.newLine();
             }
 
-            // Replace original file with temp file
-            if (!originalFile.delete()) {
-                System.out.println("Could not delete original vault file.");
-                return;
-            }
-            if (!tempFile.renameTo(originalFile)) {
-                System.out.println("Could not rename temp vault file.");
-            }
         } catch (IOException e){
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Exception: Error while opening file to write or read: " + e.getMessage());
+            return false;
         }
+
+        // NOTE: operations like deleting original file and renaming temp file should be performed after closing buffer reader and writer
+
+        if (!originalFile.delete()) {
+            System.out.println("Could not delete original vault file.");
+            return false;
+        }
+        if (!tempFile.renameTo(originalFile)) {
+            System.out.println("Could not rename temp vault file.");
+            return false;
+        }
+        return true;
     }
 
 }

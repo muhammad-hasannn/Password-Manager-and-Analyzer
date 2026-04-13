@@ -93,9 +93,11 @@ public class ConsoleMain {
         }
 
         // sending the updated data
-        if(isDataUpdated) fo.updateVault(user.getUsername(), data);
-        else System.out.println("Unable to save user vault data.");
-                
+        if(isDataUpdated) {
+            if(!fo.updateVault(user.getUsername(), data)) {
+                System.out.println("Msg from main: Something happened while doing file operations...");
+            }
+        }
     }
 
     /**
